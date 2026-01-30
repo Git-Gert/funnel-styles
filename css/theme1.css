@@ -1,1 +1,10 @@
 
+body {
+  background-color: #ffcc00 !important;
+}
+
+h1 {
+  color: #0000ff !important;
+  font-size: 48px !important;
+  text-align: center;
+}
