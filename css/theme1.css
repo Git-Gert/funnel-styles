@@ -1,3 +1,565 @@
+/* ========================================
+   GLOBAL RESET & BASE
+======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: red !important;
+  background:
+    radial-gradient(
+      ellipse at top,
+      rgba(80, 100, 160, 0.08) 0%,
+      rgba(22, 26, 45, 0.98) 35%,
+      rgba(10, 12, 22, 1) 100%
+    ) #0a0c16 !important;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif !important;
+  color: #e5e7eb !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+p {
+  margin: 0 0 0.75rem;
+  color: #cbd5f5;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* ClickFunnels basics */
+.elHeadline {
+  color: #f9fafb !important;
+}
+
+.elParagraph {
+  color: #cbd5f5 !important;
+}
+
+/* ========================================
+   LAYOUT WRAPPERS
+======================================== */
+
+.page-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+.section {
+  position: relative;
+  padding: 32px 0;
+}
+
+.section--hero {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.section--features {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.section--gallery {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+/* ========================================
+   OVERRIDES HERO / PAINT COLORS
+======================================== */
+
+/* Override ClickFunnels paint-colors system that's creating the dark box */
+[data-hero="true"][data-paint-colors],
+[data-hero="true"][data-paint-colors] .containerInnerV2,
+[data-hero="true"][data-paint-colors] .container,
+[data-hero="true"][data-paint-colors] .row,
+[data-hero="true"][data-paint-colors] .col-inner,
+[data-hero="true"][data-paint-colors] [class*="col-"],
+.fullContainer[data-hero="true"],
+.container[data-hero="true"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* BASIS HERO - TRANSPARENT BACKGROUND */
+[data-hero="true"],
+[data-hero="true"] > *:not(.vignette):not(.hero-particles):not(::before):not(::after),
+[data-hero="true"] .elRow,
+[data-hero="true"] .elColumn {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+[data-hero="true"] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ========================================
+   HERO GLOW & PARTICLES
+======================================== */
+
+/* ANIMATED GLOW LAYER 1 - Top */
+[data-hero="true"]::before{
+  content:"";
+  position:absolute;
+  top:-100%;
+  left:-60%;
+  width:220%;
+  height:240%;
+  background:
+    radial-gradient(
+      ellipse at 15% 8%,
+      rgba(140, 180, 255, 0.35),
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse at 85% 15%,
+      rgba(120, 200, 255, 0.40),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 50% 5%,
+      rgba(180, 140, 255, 0.28),
+      transparent 75%
+    );
+  filter: blur(160px);
+  opacity: 0.7;
+  pointer-events:none;
+  z-index:0;
+  animation: heroGlowPulse1 4s ease-in-out infinite alternate;
+}
+
+/* ANIMATED GLOW LAYER 2 - Right/Bottom */
+[data-hero="true"]::after{
+  content:"";
+  position:absolute;
+  top:-80%;
+  right:-40%;
+  bottom:-90%;
+  left:-50%;
+  background:
+    radial-gradient(
+      ellipse at 35% 75%,
+      rgba(0, 200, 255, 0.38),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse at 25% 85%,
+      rgba(100, 180, 255, 0.32),
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse at 75% 70%,
+      rgba(140, 100, 255, 0.30),
+      transparent 85%
+    );
+  filter: blur(180px);
+  opacity: 0.6;
+  pointer-events:none;
+  z-index:0;
+  animation: heroGlowPulse2 5s ease-in-out infinite alternate;
+}
+
+/* VIGNETTE */
+[data-hero="true"] .vignette{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0.15) 70%,
+      rgba(0,0,0,0.35) 100%
+    );
+  pointer-events: none;
+  z-index:1;
+}
+
+/* PARTICLES */
+[data-hero="true"] .hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-hero="true"] .hero-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(200, 230, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(150, 200, 255, 0.8);
+  animation: heroParticleFloat linear infinite;
+}
+
+/* Particle positions and timing */
+[data-hero="true"] .hero-particle:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+[data-hero="true"] .hero-particle:nth-child(2) { left: 80%; animation-duration: 10s; animation-delay: 1s; }
+[data-hero="true"] .hero-particle:nth-child(3) { left: 30%; animation-duration: 9s; animation-delay: 0.5s; }
+[data-hero="true"] .hero-particle:nth-child(4) { left: 70%; animation-duration: 11s; animation-delay: 2s; }
+[data-hero="true"] .hero-particle:nth-child(5) { left: 50%; animation-duration: 7s; animation-delay: 0.8s; }
+[data-hero="true"] .hero-particle:nth-child(6) { left: 20%; animation-duration: 9.5s; animation-delay: 1.5s; }
+[data-hero="true"] .hero-particle:nth-child(7) { left: 85%; animation-duration: 10.5s; animation-delay: 2.5s; }
+[data-hero="true"] .hero-particle:nth-child(8) { left: 40%; animation-duration: 8.5s; animation-delay: 0.3s; }
+[data-hero="true"] .hero-particle:nth-child(9) { left: 60%; animation-duration: 9.8s; animation-delay: 1.8s; }
+[data-hero="true"] .hero-particle:nth-child(10) { left: 15%; animation-duration: 7.5s; animation-delay: 1.2s; }
+
+/* CONTENT ABOVE EFFECTS */
+[data-hero="true"] > *:not(.vignette):not(.hero-particles) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================
+   HERO CONTENT STYLING
+======================================== */
+
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(100, 150, 255, 0.2);
+  border: 1px solid rgba(100, 180, 255, 0.4);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  animation: heroBadgePulse 3s ease-in-out infinite;
+}
+
+.hero-headline,
+[data-hero="true"] .hero-headline {
+  font-size: clamp(2.1rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #b8d4ff 0%, #7eb4ff 25%, #5a9fff 50%, #4d8aff 75%, #6fa0ff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroGradientShift 6s ease infinite;
+  filter: drop-shadow(0 0 40px rgba(100, 150, 255, 0.5));
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  color: #d1d5db;
+}
+
+[data-hero="true"] .hero-content {
+  animation: heroFadeInUp 1s ease-out;
+}
+
+/* ========================================
+   CTA BUTTONS
+======================================== */
+
+/* AI BLUE → CYAN GLOW BUTTON */
+a.elButton,
+a.elButtonSubtle,
+.elButton,
+.elButtonSubtle,
+.cf-button,
+[data-element-type="button"] a {
+  background-image: linear-gradient(135deg, #2563EB 0%, #22D3EE 100%) !important;
+  background-color: #2563EB !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 0 18px rgba(34, 211, 238, 0.45),
+    0 10px 30px rgba(37, 99, 235, 0.45) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 0.9rem 2.4rem !important;
+  font-size: 1rem !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background-image 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+/* HOVER STATE */
+a.elButton:hover,
+a.elButtonSubtle:hover,
+.elButton:hover,
+.elButtonSubtle:hover,
+.cf-button:hover,
+[data-element-type="button"] a:hover {
+  background-image: linear-gradient(135deg, #1D4ED8 0%, #06B6D4 100%) !important;
+  box-shadow:
+    0 0 28px rgba(34, 211, 238, 0.65),
+    0 14px 38px rgba(37, 99, 235, 0.6) !important;
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   LIVE PILL / COUNTDOWN STRIP
+======================================== */
+
+[data-live-pill="true"]{
+  background: linear-gradient(90deg, #1E6CFF, #2EDBFF);
+  border-radius: 999px;
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow:
+    0 0 10px rgba(46, 219, 255, 0.6),
+    0 0 20px rgba(46, 219, 255, 0.45),
+    0 0 40px rgba(30, 108, 255, 0.35);
+  color: #0b1120;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Countdown text inside pill */
+[data-live-pill="true"] .pill-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+[data-live-pill="true"] .pill-timer {
+  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 700;
+}
+
+/* ========================================
+   FEATURE ICON ROW
+======================================== */
+
+.features-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 0%, #22d3ee, #1d4ed8);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+  color: #0b1120;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  font-size: 0.95rem;
+  color: #e5e7eb;
+}
+
+/* ========================================
+   GALLERY / LOCATIE ONAFHANKELIJK
+======================================== */
+
+.gallery-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.gallery-card::after {
+  content: "LOCATIE ONAFHANKELIJK";
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Hover effect */
+.gallery-card:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes heroGlowPulse1 {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.3) rotate(15deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes heroGlowPulse2 {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.4) rotate(-20deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes heroParticleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroBadgePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(100, 180, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(100, 180, 255, 0);
+  }
+}
+
+@keyframes heroGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .features-row {
+    grid-template-columns: 1fr;
+  }
+  .gallery-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .page-wrapper {
+    padding-inline: 14px;
+  }
+
+  .hero-headline {
+    font-size: 1.9rem;
+  }
+
+  .features-row {
+    gap: 14px;
+  }
+
+  .gallery-row {
+    grid-template-columns: 1fr;
+  }
+
+  [data-hero="true"]::before,
+  [data-hero="true"]::after {
+    filter: blur(120px);
+  }
+
+  [data-hero="true"] .hero-particle {
+    width: 3px;
+    height: 3px;
+  }
 }
