@@ -1,6 +1,8 @@
 /* ClickFunnels Custom Styles */
 /* Dark Blue to Black Gradient Background */
 
+/* CSS LOADING TEST - If you see white text and gradient, CSS is working! */
+
 body {
     background: linear-gradient(to bottom, #001a33, #000000);
     background-attachment: fixed;
@@ -8,6 +10,27 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+}
+
+/* Make all text white so it's visible on dark background */
+body, p, h1, h2, h3, h4, h5, h6, span, div, a, li {
+    color: #ffffff !important;
+}
+
+/* Add a bright border to test if CSS is loading */
+body::before {
+    content: "✓ CSS IS LOADED!";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #00ff00;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 99999;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
 }
 
 /* Alternative gradient options (comment/uncomment as needed) */
