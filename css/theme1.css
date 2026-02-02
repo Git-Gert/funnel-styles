@@ -1,15 +1,18 @@
 /* ClickFunnels Custom Styles */
 /* Dark Blue to Black Gradient Background */
 
-/* CSS LOADING TEST - If you see white text and gradient, CSS is working! */
+/* CSS LOADING TEST - Multiple visual indicators */
 
 body {
-    background: linear-gradient(to bottom, #001a33, #000000);
-    background-attachment: fixed;
-    background-size: cover;
-    min-height: 100vh;
+    background: linear-gradient(to bottom, #001a33, #000000) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    min-height: 100vh !important;
     margin: 0;
     padding: 0;
+    /* HUGE RED BORDER - If you see this, CSS is loading! */
+    border: 20px solid red !important;
+    box-sizing: border-box !important;
 }
 
 /* Make all text white so it's visible on dark background */
@@ -17,20 +20,22 @@ body, p, h1, h2, h3, h4, h5, h6, span, div, a, li {
     color: #ffffff !important;
 }
 
-/* Add a bright border to test if CSS is loading */
-body::before {
-    content: "✓ CSS IS LOADED!";
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #00ff00;
-    color: #000000;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    z-index: 99999;
-    font-size: 14px;
-    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+/* Giant banner at the top */
+html::before {
+    content: "CSS IS LOADED - YOU CAN SEE THIS MESSAGE!" !important;
+    display: block !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: lime !important;
+    color: black !important;
+    padding: 30px !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 24px !important;
+    z-index: 999999 !important;
+    font-family: Arial, sans-serif !important;
 }
 
 /* Alternative gradient options (comment/uncomment as needed) */
