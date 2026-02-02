@@ -31,7 +31,7 @@ body, p, h1, h2, h3, h4, h5, h6, span, div, a, li {
     border: 2px solid rgba(96, 165, 250, 0.3) !important;
     margin: 20px auto !important;
     width: fit-content !important;
-    max-width: 90% !important;
+    max-width: 70% !important;
     text-align: center !important;
     height: auto !important;
     min-height: 50px !important;
